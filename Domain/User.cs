@@ -12,7 +12,7 @@ namespace Domain
                 CBF = true;
             }
 
-            else if (choice == 0)
+            else if (choice == 2)
             {
                 Torcedor = true;
             }

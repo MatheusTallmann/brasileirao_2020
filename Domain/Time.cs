@@ -10,14 +10,23 @@ namespace Domain
         public List<Jogador> Jogadores { get; private set; } = new List<Jogador>();
         public int Gols { get; private set; } = 0;
 
-        public Time(string name)
+        public Time(string name, User user)
         {
-            Name = name;
+            if (user.CBF)
+            {
+                Name = name;
+            }
         }
 
-        public void CriarJogadores(List<Jogador> jogadores)
+        public bool CriarJogadores(List<Jogador> jogadores)
         {
+            if (jogadores.Count < 16 || jogadores.Count > 32)
+            {
+                return false;
+            }
+
             Jogadores = jogadores;
+            return true;
         }
     }
 }
