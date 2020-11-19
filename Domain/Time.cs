@@ -28,5 +28,10 @@ namespace Domain
             Jogadores = jogadores;
             return true;
         }
+
+        public Gols(int Gols)
+        {
+            Gols++;
+        }
     }
 }
