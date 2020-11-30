@@ -29,9 +29,10 @@ namespace Domain
             return true;
         }
 
-        public Gols(int Gols)
+        public void FazerGol(int golsFeitos)
         {
-            Gols++;
+            Gols += golsFeitos;
         }
+        
     }
 }

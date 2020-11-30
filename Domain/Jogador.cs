@@ -12,5 +12,10 @@ namespace Domain
         {
             Name = name;
         }
+
+        public void FazerGol(int golsFeitos)
+        {
+            Gols += golsFeitos;
+        }
     }
 }

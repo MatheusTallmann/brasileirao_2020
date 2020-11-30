@@ -189,5 +189,22 @@ namespace Tests
             // Deve / Asserções
             Assert.False(created);
         }
+
+        [Fact]
+        public void Shouldnt_Make_Goals_To_Player_And_To_Team()
+        {
+            // Dado / Setup
+            var campeonato = new Campeonato();
+            var userCBF = new User(1);
+            var times = GerarTimes();
+
+            // Quando / Ação
+            var created = campeonato.CriarTimes(times, userCBF);
+            campeonato.GerarPartida(userCBF);
+            campeonato.FazerGolsAPartida(userCBF, )
+
+            // Deve / Asserções
+            Assert.False(created);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain
 {
@@ -55,14 +56,29 @@ namespace Domain
             return true;
         }
 
-        public bool FazerGolsAPartida(User user)
+        public bool FazerGolsAPartida(User user, Guid timeCasa, Guid timeVisitante, List<(Jogador, int)> jogadores, int golsCasa, int golsVisitante)
         {
             if (!user.CBF)
             {
                 return false;
             }
+        
+            var timeAnfitriao = _matches.FirstOrDefault(time => time.Home.Id == timeCasa).Home;
+            timeAnfitriao.FazerGol(golsCasa);
 
-            
+            var timeFora = _matches.FirstOrDefault(time => time.Visitant.Id == timeVisitante).Visitant;
+            timeFora.FazerGol(golsVisitante);
+
+            GolsJogador(jogadores);
+            return true;
+        }
+
+        private void GolsJogador(List<(Jogador jogador, int golsFeitos)> jogadores)
+        {
+            for (int i = 0; i < jogadores.Count; i++)
+            {
+                jogadores[i].jogador.FazerGol(jogadores[i].golsFeitos);
+            }
         }
     }
 }
