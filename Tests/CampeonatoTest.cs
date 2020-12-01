@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain;
 using Xunit;
 
@@ -127,6 +128,11 @@ namespace Tests
             return new List<Time>{timeInter,timeAlteticoMG,timeCorinthians,timeFlamengo,timeGremio,timePalmeiras,timeSantos,timeSaoPaulo};
         }
 
+        // public void GerarGolsAPartida(Guid teamHome, Guid teamAway, List<(Jogador jogador, int gols)> jogadores)
+        // {
+            
+        // }
+
 
         [Fact]
         public void Should_Create_Teams_If_User_Is_CBF()
@@ -195,16 +201,20 @@ namespace Tests
         {
             // Dado / Setup
             var campeonato = new Campeonato();
-            var userCBF = new User(1);
             var times = GerarTimes();
+            var time1 = times.FirstOrDefault(team => team.Name == "Palmeiras");
+            var time2 = times.FirstOrDefault(team => team.Name == "Corinthians");
+            var goleadores = new List<(Jogador jogador, int gols)>();
+            goleadores.Add((time1.Jogadores[9], 1));
+            goleadores.Add((time1.Jogadores[10], 2));
+            goleadores.Add((time1.Jogadores[8], 1));
 
             // Quando / Ação
-            var created = campeonato.CriarTimes(times, userCBF);
-            campeonato.GerarPartida(userCBF);
-            campeonato.FazerGolsAPartida(userCBF, )
+            campeonato.CriarTimes(times, new User(1));
+            campeonato.GerarPartidas(new User(1));
+            campeonato.FazerGolsAPartida(new User(1), time1.Id, time2.Id, goleadores, 4, 0);
 
             // Deve / Asserções
-            Assert.False(created);
-        }
+            }
     }
 }

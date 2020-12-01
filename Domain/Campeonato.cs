@@ -33,7 +33,7 @@ namespace Domain
             return true;
         }
 
-        public bool GerarPartida(User user)
+        public bool GerarPartidas(User user)
         {
             if (!user.CBF)
             {
