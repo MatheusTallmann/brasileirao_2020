@@ -125,7 +125,7 @@ namespace Tests
             var timeCorinthians = new Time("Corinthians", userCBF); timeCorinthians.CriarJogadores(jogadoresCorinthians);
             var timePalmeiras = new Time("Palmeiras", userCBF); timePalmeiras.CriarJogadores(jogadoresPalmeiras);
 
-            return new List<Time>{timeInter,timeAlteticoMG,timeCorinthians,timeFlamengo,timeGremio,timePalmeiras,timeSantos,timeSaoPaulo};
+            return new List<Time>{timePalmeiras,timeCorinthians,timeSantos,timeSaoPaulo,timeFlamengo,timeAlteticoMG,timeGremio,timeInter};
         }
 
         // public void GerarGolsAPartida(Guid teamHome, Guid teamAway, List<(Jogador jogador, int gols)> jogadores)
@@ -211,10 +211,12 @@ namespace Tests
 
             // Quando / Ação
             campeonato.CriarTimes(times, new User(1));
-            campeonato.GerarPartidas(new User(1));
-            campeonato.FazerGolsAPartida(new User(1), time1.Id, time2.Id, goleadores, 4, 0);
+            var gerarPartidas = campeonato.GerarPartidas(new User(1));
+            var fazerGols = campeonato.FazerGolsAPartida(new User(1), time1.Id, time2.Id, goleadores, 4, 0);
 
             // Deve / Asserções
-            }
+            Assert.True(gerarPartidas);
+            Assert.True(fazerGols);
+        }
     }
 }

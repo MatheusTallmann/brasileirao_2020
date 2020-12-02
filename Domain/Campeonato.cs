@@ -53,6 +53,7 @@ namespace Domain
                     _matches.Add(Partida);
                 }
             }
+            
             return true;
         }
 
@@ -69,6 +70,7 @@ namespace Domain
             var timeFora = _matches.FirstOrDefault(time => time.Visitant.Id == timeVisitante).Visitant;
             timeFora.FazerGol(golsVisitante);
 
+            // SetarTabela();
             GolsJogador(jogadores);
             return true;
         }
@@ -79,6 +81,30 @@ namespace Domain
             {
                 jogadores[i].jogador.FazerGol(jogadores[i].golsFeitos);
             }
+        }
+
+        public List<Jogador> Artilheiros()
+        {
+            var allPlayers = new List<Jogador>();
+            
+            for (int i = 0; i < _teams.Count; i++)
+            {
+                allPlayers.AddRange(_teams[i].Jogadores.Select(x => x));
+            }
+
+            var allPlayersGols = allPlayers.Select(player => player.Gols).ToList();
+            allPlayersGols.Sort();
+            int counter = allPlayersGols.Count - 1;
+            var artilheiros = new List<Jogador>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                var temporary = allPlayers.FirstOrDefault(player => player.Gols == allPlayersGols[counter]);
+                artilheiros.Add(temporary);
+                counter--;
+            }
+
+            return artilheiros;
         }
     }
 }
