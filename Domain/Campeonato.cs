@@ -104,6 +104,12 @@ namespace Domain
                 counter--;
             }
 
+            for (int i = allPlayersGols.Count - 1; i > allPlayersGols.Count - 6; i--)
+            {
+                var temporary = allPlayers.FirstOrDefault(player => player.Gols == allPlayersGols[i]);
+                artilheiros.Add(temporary);
+            }
+
             return artilheiros;
         }
     }
