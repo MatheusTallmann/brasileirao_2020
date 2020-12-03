@@ -10,6 +10,7 @@ namespace Domain
         public string Name { get; private set; }
         public List<Jogador> Jogadores { get; private set; } = new List<Jogador>();
         public int Gols { get; private set; } = 0;
+        public int PartidasDisputadas { get; private set; } = 0;
         public int Vitorias { get; private set; } = 0;
         public int Empates { get; private set; } = 0;
         public int Derrotas { get; private set; } = 0;
@@ -20,6 +21,31 @@ namespace Domain
         public int Aproveitamento { get; private set; } = 0;
 
         
+        public void Utilization()
+        {
+            PartidasDisputadas;
+        }
+
+        public void AddVitory()
+        {
+            Vitorias++;
+            Pontos += 3;
+            PartidasDisputadas++;
+        }
+
+        public void AddDefeat()
+        {
+            Derrotas++;
+            PartidasDisputadas++;
+        }
+
+        public void AddTie()
+        {
+            Empates++;
+            Pontos++;
+            PartidasDisputadas++;
+        }
+
         public Time(string name, User user)
         {
             if (user.CBF)
@@ -42,6 +68,7 @@ namespace Domain
         public void FazerGol(int golsFeitos)
         {
             Gols += golsFeitos;
+            GolsPro += golsFeitos;
         }
         
         public bool AdicionarJogadores(List<Jogador> jogadores)
